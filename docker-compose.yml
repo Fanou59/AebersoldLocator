@@ -1,6 +1,4 @@
-# docker-compose.yml
-
-version: "3"
+version: '3'
 services:
   db:
     image: postgres:13
@@ -12,18 +10,6 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
-
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    environment:
-      DATABASE_URL: postgres://user:password@db:5432/mydatabase
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
 
 volumes:
   db-data:
