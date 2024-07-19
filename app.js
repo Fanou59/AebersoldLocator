@@ -1,3 +1,5 @@
+import cors from "@fastify/cors"
+
 const fastify = require('fastify')()
 
 // Configuration de la base de données
@@ -15,10 +17,10 @@ fastify.get('/titre/:id', function (req,reply){
     const { id } = req.params;
 
     fastify.pg.query(
-        `Select titre, volume FROM mydatabase.aebersold WHERE id=$1`, [id],
+        `Select titre, volume, vehicle, akey, tempo, chorus, disc, track FROM mydatabase.aebersold WHERE id=$1`, [id],
         function onResult (err, result){
-            const {titre, volume} = result.rows[0]
-            reply.send({titre, volume})
+            const {titre, volume, vehicle, akey, tempo, chorus, disc, track} = result.rows[0]
+            reply.send({titre, volume, vehicle, akey, tempo, chorus, disc, track})
         }
     )
 })
