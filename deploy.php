@@ -6,7 +6,7 @@ require 'recipe/symfony.php';
 
 // Config
 
-set('repository', 'https://github.com/Fanou59/AebersoldLocator_V5.git');
+set('repository', 'https://github.com/Fanou59/AebersoldLocator.git');
 
 add('shared_files', []);
 add('shared_dirs', []);
