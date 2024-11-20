@@ -1,0 +1,33 @@
+# Activer la réécriture d'URL
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Si le fichier demandé n'existe pas
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # Si le répertoire demandé n'existe pas
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Rediriger toutes les requêtes vers index.php
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Forcer l'utilisation de HTTPS (si nécessaire)
+# Uniquement si vous avez configuré un certificat SSL et que votre serveur supporte HTTPS
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Eviter d'afficher les répertoires s'il n'y a pas d'index
+Options -Indexes
+
+# Ajouter des règles de sécurité (facultatif)
+# Interdire l'accès au fichier .htaccess lui-même
+<Files .htaccess>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Sécuriser l'accès aux fichiers sensibles
+<FilesMatch "\.(env|yml|twig|sql|log|ini|phps|htaccess)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
