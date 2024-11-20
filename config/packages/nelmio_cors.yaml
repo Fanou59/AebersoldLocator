@@ -11,6 +11,7 @@
 
 nelmio_cors:
   defaults:
+    origin_regex: true
     allow_credentials: true
     allow_origin: ["%env(CORS_ALLOW_ORIGIN)%"]
     allow_headers: ["*"]
